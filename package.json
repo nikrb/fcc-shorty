@@ -1,0 +1,17 @@
+{
+  "name": "Url Shortener",
+  "version": "1.0.0",
+  "description": "fcc project url shortener",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nikrb",
+  "license": "cc0",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
