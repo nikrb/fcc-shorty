@@ -16,8 +16,31 @@ mongo.connect( 'mongodb://localhost:27017/shorty', ( err, db) => {
     res.sendFile( process.cwd() + '/public/index.html');
   });
 
-  app.get( '/new/:url', (req, res) => {
-    // do the magic
+  app.get( '/:surl', (req, res) => {
+    const surl = parseInt( req.params.surl, 10);
+    if( isNaN( surl)){
+      res.send( {error: "No such shortcode"});
+    } else {
+      db.collection( 'urls').findOne( { surl: surl})
+      .then( (result) => {
+        if( result){
+          res.redirect( result.url);
+        } else {
+          res.send( {error: "No such shortcode"});
+        }
+      });
+    }
+  });
+
+  app.get( '/new/*', (req, res) => {
+    const ourl = req.params[0];
+    const col = db.collection( 'urls');
+    col.count().then( (count) => {
+      col.insert( {url:ourl, surl: count+1})
+      .then( (result) => {
+        res.send( {original_url: ourl, short_url: count+1});
+      });
+    });
   });
 
   app.listen(app.get('port'), () => {
