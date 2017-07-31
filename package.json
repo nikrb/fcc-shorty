@@ -4,6 +4,7 @@
   "description": "fcc project url shortener",
   "scripts": {
     "start": "nodemon server.js",
+    "mongo": "mongod --bind_ip=$IP --nojournal",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nikrb",
