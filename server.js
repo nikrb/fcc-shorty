@@ -41,7 +41,7 @@ mongo.connect( 'mongodb://localhost:27017/shorty', ( err, db) => {
       col.count().then( (count) => {
         col.insert( {url:ourl, surl: count+1})
         .then( (result) => {
-          res.send( {original_url: ourl, short_url: count+1});
+          res.send( {original_url: ourl, short_url: result.ops[0].surl});
         });
       });
     } else {
